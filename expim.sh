@@ -3,13 +3,12 @@
 echo ":::: Let me speak from my heart ...."
 docker ps -q
 
-echo ":::: Downloading latest WP from https://wordpress.org/"
+echo ":::: Downloading latest wp from https://wordpress.org/"
 wget https://wordpress.org/latest.zip
 
 echo ":::: Unzip latest WP ::::"
 unzip -o latest.zip
 rm -rf html/
-ls -la
 mv -f wordpress/ html/
 
 echo ":::: Delete temp-files ::::"
@@ -39,7 +38,8 @@ sudo docker-compose up -d
 echo ":::: Plz wait few seconds ::::"
 sleep 15
 echo ":::: Okey, go! ::::"
-echo ":::: Exec in docker ::::"
+echo ":::: Exec script wpress.sh in docker ::::"
 docker exec -it expim-web bash -c "my_script/wpress.sh"
 
+docker ps
 echo ":::: Looks good..."
