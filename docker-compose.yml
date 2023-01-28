@@ -1,0 +1,28 @@
+version: "3.9"
+services:
+  php-apache:
+    ports:
+      - "80:80"
+    build: './build/php'
+    volumes:
+      - ./html:/var/www/html
+      - ./script:/var/www/script/
+    #command: /bin/bash -c "./wpress.sh && tail -f /dev/null"
+    #restart: always
+    container_name: expim-web
+  mysql:
+    ports:
+      - "3306:3306"
+    build: './build/mysql'
+    environment:
+      MYSQL_ROOT_PASSWORD: "rootexpim"
+      MYSQL_DATABASE: "expim"
+      MYSQL_USER: "expim"
+      MYSQL_PASSWORD: "expimpw"
+    volumes:
+      - dbData:/var/lib/mysql
+    container_name: expim-db
+    restart: always
+volumes:
+  app:
+  dbData:
