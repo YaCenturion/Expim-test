@@ -27,6 +27,10 @@
           - docker.io
           - git
         state: present
+    - name: Add key to authorized_keys
+      authorized_key:
+        user: centurion
+        key: "{{ lookup('file', 'id_rsa.pub') }}"
     - name: Clone repository
       git:
         repo: https://github.com/YaCenturion/Expim-test.git
