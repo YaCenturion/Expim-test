@@ -6,8 +6,7 @@ services:
     build: './build/php'
     volumes:
       - ./html:/var/www/html
-      - ./script:/var/www/script/
-    #command: /bin/bash -c "./wpress.sh && tail -f /dev/null"
+      - ./script:/var/www/html/my_script/
     #restart: always
     container_name: expim-web
   mysql:
@@ -15,12 +14,12 @@ services:
       - "3306:3306"
     build: './build/mysql'
     environment:
-      MYSQL_ROOT_PASSWORD: "rootexpim"
-      MYSQL_DATABASE: "expim"
+      MYSQL_ROOT_PASSWORD: "expim"
+      MYSQL_DATABASE: "wp"
       MYSQL_USER: "expim"
-      MYSQL_PASSWORD: "expimpw"
+      MYSQL_PASSWORD: "expim"
     volumes:
-      - dbData:/var/lib/mysql
+      - /data/mysql:/var/lib/mysql
     container_name: expim-db
     restart: always
 volumes:
