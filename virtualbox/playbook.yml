@@ -1,56 +1,33 @@
-- name: Create virtual Ubuntu server
+- name: Create virtual Ubuntu Server
   hosts: localhost
   connection: local
-  gather_facts: no
-
+  gather_facts: false
   tasks:
     - name: Create virtual machine
       virtualbox_guest:
-        name: "expim-vm"
+        name: expim-vm
         state: present
         os_type: Ubuntu_64
         memory: 4096
         cpus: 2
-        disk_size: 35
-        network_adapters:
-          - name: "NAT"
-            port_forwarding:
-              - hostport: 80
-                guestport: 80
-              - hostport: 2222
-                guestport: 22
-      register: vm_info
-
-    - name: Add ISO to virtual machine
-      virtualbox_iso:
-        name: "expim-vm"
-        iso_path: "D:\iso\ubuntu-22.04.1-live-server-amd64.iso"
-        iso_interface: IDE
-        state: present
-
-    - name: Start virtual machine
-      virtualbox_guest:
-        name: "expim-vm"
-        state: running
+        disk_size: 35000
+        iso_path: d:\iso\ubuntu-22.04.1-live-server-amd64.iso
+        port_forwarding:
+          - hostport: 80
+            guestport: 80
+          - hostport: 2222
+            guestport: 22
         username: expim
         password: expim
-
-    - name: Wait for SSH
-      wait_for:
-        host: "{{ vm_info.guest_ip }}"
-        port: 22
-        timeout: 600
-
-    - name: Install openssh
-      become: yes
-      become_user: root
+    - name: Install openssh, docker, git
+      become: true
       apt:
-        name: openssh-server
+        name:
+          - openssh-server
+          - docker.io
+          - git
         state: present
-
-    - name: Install Docker
-      become: yes
-      become_user: root
-      apt:
-        name: docker.io
-        state: present
+    - name: Clone repository
+      git:
+        repo: https://github.com/YaCenturion/Expim-test.git
+        dest: /home/expim/job
