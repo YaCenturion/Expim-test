@@ -17,6 +17,6 @@ sleep 10
 
 # Automated install WP
 ## wp core version --allow-root --extra
-wp core install --allow-root --url=localhost --title=Expim_WordPress --admin_user=admin --admin_password=expim --admin_email=admin@expim.co.il
+wp core install --allow-root --url=localhost --title=Expim_WordPress --admin_user=admin --admin_password=qwerty --admin_email=admin@expim.co.il
 echo "====================== >>>> <<<< ======================="
 echo "Well, automating installation WP for Expim successfully."
