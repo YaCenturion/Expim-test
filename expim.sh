@@ -1,7 +1,7 @@
 #!/bin/bash/
 
 echo ":::: Let me speak from my heart ...."
-docker ps -q
+# docker ps -q
 
 echo ":::: Downloading latest wp from https://wordpress.org/"
 wget https://wordpress.org/latest.zip
