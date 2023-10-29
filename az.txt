@@ -1,1 +1,1 @@
-git clone https://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@github.com/YaCenturion/XPM_Medica_UI.git
+
