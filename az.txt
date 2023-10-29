@@ -1,1 +1,1 @@
-git clone https://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HQgithub.com/ExpimLTD/XPM_Medica_UI.git
+
